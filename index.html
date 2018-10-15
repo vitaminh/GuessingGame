@@ -7,12 +7,37 @@
     <link rel="stylesheet" href="main.css">
     <!-- the MAIN.CSS file is linked here -->
   </head>
-
+  
   <body>
-
-
-
-
+    <h1>Play the Guessing Game!</h1>
+    <label for="numberPicker">Guess a number between 1 - 100!</label> 
+    <input
+      id="numberPicker"
+      type="number"
+      min="1" max="100" />
+    <input 
+      id="submitGuess"
+      type="button"
+      value="Submit Guess" />
+    <input 
+      id="getHint"
+      type="button"
+      value="Get Hint" />
+    <input 
+      id="playAgain"
+      type="button"
+      value="Play Again" />
+    <h3>x Guesses Remaining</h3>
+    <figure>
+      <figcaption>Previous Guesses</figcaption>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+    </figure>
 
     <!-- <script src='js/guessing-game.js'></script> -->
     <!-- uncomment the script tag above when you are ready to add JavaScript to your document -->

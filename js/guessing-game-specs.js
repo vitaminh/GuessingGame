@@ -30,7 +30,7 @@ describe('shuffle function', () => {
     const unshuffledArray = [20, 50, 70];
     const shuffledArray = shuffle(unshuffledArray);
     expect(shuffledArray.length).toBe(3);
-    expect(shuffledArray === shuffledArray).toEqual(true);
+    expect(shuffledArray === unshuffledArray).toEqual(true);
   });
 });
 
@@ -154,7 +154,7 @@ describe('Game class', () => {
 
     describe('newGame function', () => {
       it('returns an empty, new game instance', () => {
-        game = newGame(); // newGame calls new Game() and returns the new instance
+        game = Game.newGame(); // newGame calls new Game() and returns the new instance
         expect(game.playersGuess).toEqual(null);
         expect(game.pastGuesses.length).toEqual(0);
       });
@@ -170,13 +170,13 @@ describe('Game class', () => {
         expect(hintArray.indexOf(game.winningNumber)).toBeGreaterThan(-1);
       });
       it('calls generateWinningNumber to fill the rest of the hint array with random numbers', () => {
-        spyOn(window, 'generateWinningNumber'); // note: in order to pass this spec, generateWinningNumber needs to be defined
+        spyOn(window, 'generateWinningNumber').and.callThrough(); // note: in order to pass this spec, generateWinningNumber needs to be defined
         // with a function declaration, ex: function generateWinningNumber() {}
         game.provideHint();
-        expect(generateWinningNumber.calls.count()).toBe(2);
+        expect(generateWinningNumber.calls.count()).toBe(2)
       });
       it('calls the shuffle function', function() {
-        spyOn(window, 'shuffle'); // note: in order to pass this spec, shuffle needs to be defined
+        spyOn(window, 'shuffle').and.callThrough(); // note: in order to pass this spec, shuffle needs to be defined
         // with a function declaration, ex: function shuffle() {}
         game.provideHint();
         expect(shuffle).toHaveBeenCalled();
