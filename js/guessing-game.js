@@ -1,6 +1,6 @@
 // Begin Guessing Game Code
 function generateWinningNumber() {
-    return Math.floor(Math.random() * 10) + 1;
+    return Math.floor(Math.random() * 100) + 1;
 }
 
 function shuffle(arr) {
@@ -85,13 +85,18 @@ Game.prototype.provideHint = function() {
 let game = new Game();
 let status = document.getElementById('gameState');
 let choiceOfGuesses = [];   // collection of all number choice buttons
-for (let i = 1; i < 11; i++) {
+for (let i = 1; i <= 100; i++) {
     let currentNumber = document.getElementById(`square${i}`);
     currentNumber.addEventListener('click', () => {
         if (game.pastGuesses.length < 5 && !game.pastGuesses.includes(game.winningNumber)) {
             status.innerHTML = game.playersGuessSubmission(parseInt(currentNumber.value, 10));
             currentNumber.disabled = true;
             $(`#displayGuessBox${game.pastGuesses.length}`).html(game.playersGuess);
+            if (game.playersGuess === game.winningNumber) {
+                $(`#displayGuessBox${game.pastGuesses.length}`).addClass('isWinningNumber');
+            } else {
+                $(`#displayGuessBox${game.pastGuesses.length}`).addClass('isNotWinningNumber');
+            }
         }
     })
     choiceOfGuesses.push(currentNumber);
@@ -101,6 +106,9 @@ let hintBtn = document.getElementById('getHint');
 hintBtn.addEventListener('click', () => {
     if (game.pastGuesses.length < 5) {
         game.provideHint();
+        game.hintArr.forEach(e => {
+            $(`#square${e}`).addClass('isHint');
+        });
         hintBtn.disabled = true;
     }
 });
@@ -110,11 +118,14 @@ newGameBtn.addEventListener('click', () => {
     status.innerHTML = 'Guess a Number Between 1-100!';
     choiceOfGuesses.forEach(btn => {
         btn.disabled = false;
+        $(btn).removeClass('isHint');
     });
     hintBtn.disabled = false;
     // clear out past guesses
     for (let i = 1; i < 6; i++) {
         $(`#displayGuessBox${i}`).html('');
+        $(`#displayGuessBox${i}`).removeClass('isWinningNumber');
+        $(`#displayGuessBox${i}`).removeClass('isNotWinningNumber');
     }
     
 });
