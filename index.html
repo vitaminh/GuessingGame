@@ -4,43 +4,168 @@
   <head>
     <meta charset="UTF-8">
     <title>Guessing Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Coda|Righteous&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
-    <!-- the MAIN.CSS file is linked here -->
   </head>
   
   <body>
-    <h1>Play the Guessing Game!</h1>
-    <label for="numberPicker">Guess a number between 1 - 100!</label> 
-    <input
-      id="numberPicker"
-      type="number"
-      min="1" max="100" />
-    <input 
-      id="submitGuess"
-      type="button"
-      value="Submit Guess" />
-    <input 
-      id="getHint"
-      type="button"
-      value="Get Hint" />
-    <input 
-      id="playAgain"
-      type="button"
-      value="Play Again" />
-    <h3>x Guesses Remaining</h3>
-    <figure>
-      <figcaption>Previous Guesses</figcaption>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
-    </figure>
+    <div id="appContainer">
+      <div id="titleDiv">
+        <h1 id="gameState">Guess a Number Between 1-100!</h1>
+      </div>
+      <!-- Table displaying numbers 1-100 -->
+      <div id="gamePlayArea">
+        <div id="numberGridDiv">
+          <table id="allNumbers">
+          <tr id="row1">
+            <td ><input class="numberInput" type="button" id="square1" value=1 /></td>
+            <td ><input class="numberInput" type="button" id="square2" value=2 /></td>
+            <td ><input class="numberInput" type="button" id="square3" value=3 /></td>
+            <td ><input class="numberInput" type="button" id="square4" value=4 /></td>
+            <td ><input class="numberInput" type="button" id="square5" value=5 /></td>
+            <td ><input class="numberInput" type="button" id="square6" value=6 /></td>
+            <td ><input class="numberInput" type="button" id="square7" value=7 /></td>
+            <td ><input class="numberInput" type="button" id="square8" value=8 /></td>
+            <td ><input class="numberInput" type="button" id="square9" value=9 /></td>
+            <td ><input class="numberInput" type="button" id="square10" value=10 /></td>
+          </tr>
+          <tr>
+            <td id="square11">11</td>
+            <td id="square12">12</td>
+            <td id="square13">13</td>
+            <td id="square14">14</td>
+            <td id="square15">15</td>
+            <td id="square16">16</td>
+            <td id="square17">17</td>
+            <td id="square18">18</td>
+            <td id="square19">19</td>
+            <td id="square20">20</td>
+          </tr>
+          <tr>
+            <td id="square21">21</td>
+            <td id="square22">22</td>
+            <td id="square23">23</td>
+            <td id="square24">24</td>
+            <td id="square25">25</td>
+            <td id="square26">26</td>
+            <td id="square27">27</td>
+            <td id="square28">28</td>
+            <td id="square29">29</td>
+            <td id="square30">30</td>
+          </tr>
+          <tr>
+            <td id="square31">31</td>
+            <td id="square32">32</td>
+            <td id="square33">33</td>
+            <td id="square34">34</td>
+            <td id="square35">35</td>
+            <td id="square36">36</td>
+            <td id="square37">37</td>
+            <td id="square38">38</td>
+            <td id="square39">39</td>
+            <td id="square40">40</td>
+          </tr>
+          <tr>
+            <td id="square41">41</td>
+            <td id="square42">42</td>
+            <td id="square43">43</td>
+            <td id="square44">44</td>
+            <td id="square45">45</td>
+            <td id="square46">46</td>
+            <td id="square47">47</td>
+            <td id="square48">48</td>
+            <td id="square49">49</td>
+            <td id="square50">50</td>
+          </tr>
+          <tr>
+            <td id="square51">51</td>
+            <td id="square52">52</td>
+            <td id="square53">53</td>
+            <td id="square54">54</td>
+            <td id="square55">55</td>
+            <td id="square56">56</td>
+            <td id="square57">57</td>
+            <td id="square58">58</td>
+            <td id="square59">59</td>
+            <td id="square60">60</td>
+          </tr>
+          <tr>
+            <td id="square61">61</td>
+            <td id="square62">62</td>
+            <td id="square63">63</td>
+            <td id="square64">64</td>
+            <td id="square65">65</td>
+            <td id="square66">66</td>
+            <td id="square67">67</td>
+            <td id="square68">68</td>
+            <td id="square69">69</td>
+            <td id="square70">70</td>
+          </tr>
+          <tr>
+            <td id="square71">71</td>
+            <td id="square72">72</td>
+            <td id="square73">73</td>
+            <td id="square74">74</td>
+            <td id="square75">75</td>
+            <td id="square76">76</td>
+            <td id="square77">77</td>
+            <td id="square78">78</td>
+            <td id="square79">79</td>
+            <td id="square80">80</td>
+          </tr>
+          <tr>
+            <td id="square81">81</td>
+            <td id="square82">82</td>
+            <td id="square83">83</td>
+            <td id="square84">84</td>
+            <td id="square85">85</td>
+            <td id="square86">86</td>
+            <td id="square87">87</td>
+            <td id="square88">88</td>
+            <td id="square89">89</td>
+            <td id="square90">90</td>
+          </tr>
+          <tr>
+            <td id="square91">91</td>
+            <td id="square92">92</td>
+            <td id="square93">93</td>
+            <td id="square94">94</td>
+            <td id="square95">95</td>
+            <td id="square96">96</td>
+            <td id="square97">97</td>
+            <td id="square98">98</td>
+            <td id="square99">99</td>
+            <td id="square100">100</td>
+          </tr>
+        </table>
+        </div>
 
-    <!-- <script src='js/guessing-game.js'></script> -->
-    <!-- uncomment the script tag above when you are ready to add JavaScript to your document -->
-  </body>
+
+        <div id="guessesDiv">
+          <table>
+            <tr><td id="displayGuessBox1" class="displayGuessBox"></td></tr>
+            <tr><td id="displayGuessBox2" class="displayGuessBox"></td></tr>
+            <tr><td id="displayGuessBox3" class="displayGuessBox"></td></tr>
+            <tr><td id="displayGuessBox4" class="displayGuessBox"></td></tr>
+            <tr><td id="displayGuessBox5" class="displayGuessBox"></td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="buttonsDiv">
+        <input 
+          id="getHint"
+          type="button"
+          value="Get Hint" />
+        <input 
+          id="newGame"
+          type="button"
+          value="New Game" />
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='js/guessing-game.js'></script>
+</body>
 
 </html>

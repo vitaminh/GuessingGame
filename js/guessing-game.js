@@ -1,15 +1,6 @@
-/* 
-
-Write your guess-game code here! Don't forget to look at the test specs as a guide. You can run the specs
-by running "testem".
-
-In this file, you will also include the event listeners that are needed to interact with your HTML file when
-a user clicks a button or adds a guess to the input field.
-
-*/
-
+// Begin Guessing Game Code
 function generateWinningNumber() {
-    return Math.floor(Math.random() * 100) + 1;
+    return Math.floor(Math.random() * 10) + 1;
 }
 
 function shuffle(arr) {
@@ -32,6 +23,7 @@ class Game {
         this.playersGuess = guess;
         this.pastGuesses = past;
         this.winningNumber = generateWinningNumber();
+        this.hintArr = [];
     }
 
     static newGame() {
@@ -56,30 +48,74 @@ Game.prototype.playersGuessSubmission = function(guess) {
 }
 
 Game.prototype.checkGuess = function(guess) {
-    if (guess === this.winningNumber) {
-        return 'You Win!';
-    }
     if (this.pastGuesses.includes(guess)) {
         return 'You have already guessed that number.';
     }
     this.pastGuesses.push(guess);
-    if (this.pastGuesses.length === 5) {
-        return 'You Lose.';
+    if (guess === this.winningNumber) {
+        return 'You Win! 😁';
     }
+    if (this.pastGuesses.length === 5) {
+        return 'You Lose ☹️';
+    }
+    const guessDirection = guess > this.winningNumber ? `Guess lower.` : `Guess higher.`;
     const guessDiff = this.difference();
-    if (guessDiff < 10) return 'You\'re burning up!';
-    if (guessDiff < 25) return 'You\'re lukewarm.';
-    if (guessDiff < 50) return 'You\'re a bit chilly.';
-    if (guessDiff < 100) return 'You\'re ice cold!';
+    if (guessDiff < 10) return 'You\'re burning up! ' + guessDirection;
+    if (guessDiff < 25) return 'You\'re lukewarm. ' + guessDirection;
+    if (guessDiff < 50) return 'You\'re a bit chilly. ' + guessDirection;
+    if (guessDiff < 100) return 'You\'re ice cold! ' + guessDirection;
 }
 
 Game.prototype.provideHint = function() {
-    const hintArr = [this.winningNumber];
-    while (hintArr.length < 3) {
+    if (this.hintArr.length > 0) return this.hintArr;
+
+    const newHintArr = [this.winningNumber];
+    while (newHintArr.length < (7 - this.pastGuesses.length)) {
         const newHint = generateWinningNumber();
-        if (!hintArr.includes(newHint)) {
-            hintArr.push(newHint);
+        if (!newHintArr.includes(newHint) && !this.pastGuesses.includes(newHint)) {
+            newHintArr.push(newHint);
         }
     }
-    return shuffle(hintArr);
+    this.hintArr = shuffle(newHintArr);
+    return this.hintArr;
 }
+
+// Implementation of Guessing Game 
+
+let game = new Game();
+let status = document.getElementById('gameState');
+let choiceOfGuesses = [];   // collection of all number choice buttons
+for (let i = 1; i < 11; i++) {
+    let currentNumber = document.getElementById(`square${i}`);
+    currentNumber.addEventListener('click', () => {
+        if (game.pastGuesses.length < 5 && !game.pastGuesses.includes(game.winningNumber)) {
+            status.innerHTML = game.playersGuessSubmission(parseInt(currentNumber.value, 10));
+            currentNumber.disabled = true;
+            $(`#displayGuessBox${game.pastGuesses.length}`).html(game.playersGuess);
+        }
+    })
+    choiceOfGuesses.push(currentNumber);
+}
+
+let hintBtn = document.getElementById('getHint');
+hintBtn.addEventListener('click', () => {
+    if (game.pastGuesses.length < 5) {
+        game.provideHint();
+        hintBtn.disabled = true;
+    }
+});
+let newGameBtn = document.getElementById('newGame');
+newGameBtn.addEventListener('click', () => {
+    game = new Game();
+    status.innerHTML = 'Guess a Number Between 1-100!';
+    choiceOfGuesses.forEach(btn => {
+        btn.disabled = false;
+    });
+    hintBtn.disabled = false;
+    // clear out past guesses
+    for (let i = 1; i < 6; i++) {
+        $(`#displayGuessBox${i}`).html('');
+    }
+    
+});
+
