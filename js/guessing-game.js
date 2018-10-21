@@ -70,7 +70,7 @@ Game.prototype.provideHint = function() {
     if (this.hintArr.length > 0) return this.hintArr;
 
     const newHintArr = [this.winningNumber];
-    while (newHintArr.length < (7 - this.pastGuesses.length)) {
+    while (newHintArr.length < (10 - this.pastGuesses.length)) {
         const newHint = generateWinningNumber();
         if (!newHintArr.includes(newHint) && !this.pastGuesses.includes(newHint)) {
             newHintArr.push(newHint);
